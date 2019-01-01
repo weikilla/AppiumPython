@@ -1,0 +1,23 @@
+# coding=utf-8
+import os
+
+
+class DosCmd:
+
+    def excute_cmd_result(self, command):
+        # 获取adb devices 的结果
+        result_list = []
+        result = os.popen(command).readlines()
+        for i in result:
+            if i == '\n':
+                continue
+            result_list.append(i.strip('\n'))
+        return result_list
+
+    def excute_cmd(self, command):
+        os.system(command)
+
+
+if __name__ == '__main__':
+    dos = DosCmd()
+    print dos.excute_cmd_result()
