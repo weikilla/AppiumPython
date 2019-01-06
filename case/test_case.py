@@ -58,10 +58,10 @@ def get_suite(i):
     suite = unittest.TestSuite()
     suite.addTest(CaseTest("test_01", parame=i))
     suite.addTest(CaseTest("test_02", parame=i))
-    unittest.TextTestRunner().run(suite)
-    # html_file = "/Users/wei/Documents/PythonTest/AppiumPython/report/report" + str(i) + ".html"
-    # fp = file(html_file, 'wb')
-    # HTMLTestRunner.HTMLTestRunner(stream=fp).run(suite)
+    # unittest.TextTestRunner().run(suite)
+    html_file = "/Users/wei/Documents/PythonTest/AppiumPython/report/report" + str(i) + ".html"
+    fp = file(html_file, 'wb')
+    HTMLTestRunner.HTMLTestRunner(stream=fp).run(suite)
 
 
 def get_count():
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     appium_init()
     threads = []
     for i in range(get_count()):
-        t = multiprocessing.Process(target=get_suite,  args=(i,))
+        t = threading.Thread(target=get_suite,  args=(i,))
         threads.append(t)
     for j in threads:
         j.start()

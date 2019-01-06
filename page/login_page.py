@@ -30,7 +30,7 @@ class LoginPage:
     def get_register_element(self):
         return self.get_by_local.get_element('register')
 
-    def get_toast_element(self, message):
+    def get_toast_element(self, *args):
         time.sleep(2)
-        tost_element = ("xpath", "//*[contains(@text," + message + ")]")
+        tost_element = ("xpath", "//*[contains(@text," + args[0] + ")]")
         return WebDriverWait(self.driver, 10, 0.1).until(EC.presence_of_element_located(tost_element))

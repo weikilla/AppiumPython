@@ -1,5 +1,6 @@
 # coding=utf-8
 import xlrd
+from xlutils.copy import copy
 
 
 class OperaExcel:
@@ -10,7 +11,7 @@ class OperaExcel:
         :param i:
         """
         if file_path is None:
-            self.file_path = '/Users/wei/Documents/PythonTest/AppiumPython/config/case.xlsx'
+            self.file_path = '/Users/wei/Documents/PythonTest/AppiumPython/config/case.xls'
         else:
             self.file_path = file_path
         if i is None:
@@ -53,8 +54,15 @@ class OperaExcel:
         data = self.data.cell(row, cell).value
         return data
 
+    def write_value(self, row, value):
+        read_value = self.excel
+        write_data = copy(read_value)
+        write_save = write_data.get_sheet(0)
+        write_save.write(row, 8, value)
+        write_data.save(self.file_path)
+
 
 if __name__ == '__main__':
     opera = OperaExcel()
-    print opera.get_cell(2, 3)
     print opera.get_lines()
+    print opera.write_value(6, 'pass')
